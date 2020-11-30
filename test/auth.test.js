@@ -1,69 +1,38 @@
-const expect = require("expect");
-const mongoose = require("mongoose");
+process.env.NODE_ENV = "test";
+
+const { mongoose } = require("../config/mongoose");
 const User = require("../models/user");
-const { register, login, logout } = require("../controllers/auth_controller");
+const { app } = require("../app");
 
-const databaseConnection = "mongodb://localhost/tooth_inc_test";
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+chai.use(chaiHttp);
 
-before((done) => connectToMongo(done));
-after((done) => {
-  mongoose.disconnect(() => done());
-});
-
-beforeEach(async () => {
-  await clearData().exec();
-  let user = await setupData();
-  UserId = user._id;
-});
-
-function connectToMongo(done) {
-  mongoose.connect(
-    databaseConnection,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: true,
-      useCreateIndex: true,
-    },
-    (error) => {
-      if (error) {
-        console.log("Error connecting to MongoDB");
-        done();
-      } else {
-        console.log("Connected to test database");
-        done();
-      }
-    }
-  );
-}
-
-function setupData() {
-  let date = Date.now();
-  let testUser = {};
-  testUser.username = "tester";
-  testUser.email = "test@test.com";
-  testUser.password = "password1";
-  testUser.create_date = date;
-  testUser.modified_date = date;
-  return User.create(testUser);
-}
-
-describe("register", () => {
-  let req = {
-    body: {
-      username: "testing",
-      email: "testing@testing.com",
-      password: "password",
-    },
+describe("Auth Tests", () => {
+  const newUser = {
+    username: "Test User",
+    email: "test@email.com",
+    password: "this_is_a_password",
   };
 
-  it("should add a new user", async () => {
-    await register(req);
-    const user = await User.find();
-    expect(user.length).toBe(1);
+  before((done) => {
+    User.deleteMany({}, (err) => {});
+    done();
   });
-});
 
-function clearData() {
-  return User.deleteMany();
-}
+  after((done) => {
+    mongoose.disconnect(() => done());
+  });
+  // describe("/POST /auth/register", (done) => {
+  //   it("Should allow a user to register", (done) => {
+  //     chai
+  //       .request(app)
+  //       .post("/auth/register")
+  //       .send(newUser)
+  //       .end((err, res) => {
+  //         res.should.have.status(200);
+  //       });
+  //     done();
+  //   });
+  // });
+});

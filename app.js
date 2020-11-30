@@ -30,25 +30,13 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
-const databaseConnection =
-  process.env.MONGODB_URI || "mongodb://localhost/santa_site";
+// const NODE_ENV = process.env.MONGODB_URI || "mongodb://localhost/santa_site";
 
-mongoose.connect(
-  databaseConnection,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-    useCreateIndex: true,
-  },
-  (error) => {
-    if (error) {
-      console.log("Error connecting to MongoDB");
-    } else {
-      console.log("Connected to Santa database", databaseConnection);
-    }
-  }
-);
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
+mongooseConnect(process.env.NODE_ENV);
 
 app.use(
   session({
@@ -81,3 +69,7 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => console.log(`Santa app listening on port ${port}!`));
+
+module.exports = {
+  app,
+};

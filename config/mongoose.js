@@ -2,25 +2,27 @@ const mongoose = require("mongoose");
 
 // connects to the test database if it is a test, otherwise will connect to the production database
 const mongooseConnect = (env) => {
+  console.log(env);
   if (env === "test") {
     mongoose
-      .connect("mongodb://localhost/santa_site", {
+      .connect("mongodb://localhost/santa_site_test", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false,
+        useFindAndModify: true,
+        useCreateIndex: true,
       })
       .catch((error) => console.log(error));
   } else {
     mongoose
-      .connect(process.env.MONGODB_URL, {
+      .connect(env, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false,
+        useFindAndModify: true,
+        useCreateIndex: true,
       })
       .then(console.log("connected to the database"))
       .catch((error) => console.log(error));
   }
-  // This logs any errors after the initial connection
   mongoose.connection.on("error", (err) => console.log(err));
 };
 
