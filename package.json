@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --exit",
+    "test-with-coverage": "nyc --reporter=text mocha --exit",
     "start": "nodemon app.js"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "expect": "^26.6.2",
     "forever": "^3.0.4",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.6"
+    "nodemon": "^2.0.6",
+    "nyc": "^15.1.0"
   }
 }

@@ -10,12 +10,6 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe("Auth Tests", () => {
-  const newUser = {
-    username: "Test User",
-    email: "test@email.com",
-    password: "this_is_a_password",
-  };
-
   before((done) => {
     chai.request(app).get("/auth/logout");
     done();
@@ -31,6 +25,11 @@ describe("Auth Tests", () => {
 
   describe("/POST /auth/register", () => {
     it("Should allow a user to register", (done) => {
+      const newUser = {
+        username: "Test User",
+        email: "test@email.com",
+        password: "this_is_a_password",
+      };
       chai
         .request(app)
         .post("/auth/register")
@@ -38,6 +37,22 @@ describe("Auth Tests", () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.user.username.should.be.eql("Test User");
+        });
+      done();
+    });
+
+    it("Should not allow a user to register with an invalid email", (done) => {
+      const invalidEmailUser = {
+        username: "My Email is Invalid",
+        email: "hello",
+        password: "lul",
+      };
+      chai
+        .request(app)
+        .post("/auth/register")
+        .send(invalidEmailUser)
+        .end((err, res) => {
+          err.message.should.be.eql("Please provide an email");
         });
       done();
     });
