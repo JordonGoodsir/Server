@@ -8,7 +8,6 @@ const register = (req, res) => {
     new User({
       username: req.body.username,
       email: req.body.email,
-      admin: false,
     }),
     req.body.password,
     (error) => {
