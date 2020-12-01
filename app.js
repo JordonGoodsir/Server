@@ -10,6 +10,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const giftListRouter = require("./routes/giftList_routes");
 const userRouter = require("./routes/user_routes");
 const authRouter = require("./routes/auth_routes");
+const childGiftListRouter = require("./routes/childGiftList_routes");
 
 const { mongooseConnect } = require("./config/mongoose");
 
@@ -63,6 +64,7 @@ app.use(passport.session());
 app.use("/auth", authRouter);
 app.use("/giftlist", giftListRouter);
 app.use("/dashboard", userRouter);
+app.use("/lettertosanta", childGiftListRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

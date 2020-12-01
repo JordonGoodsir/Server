@@ -1,15 +1,15 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const User = require("./user");
+const User = require('./user');
 
 const Gift = new Schema({
   gift: { type: String, required: true },
   receiver: String,
 });
 
-const ToyBoxSchema = new Schema({
+const GiftList = new Schema({
   gifts: [Gift],
   user: User,
 });
 
-module.exports = mongoose.model("GiftList", ToyBoxSchema);
+module.exports = mongoose.model('GiftList', GiftList);
