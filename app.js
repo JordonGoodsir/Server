@@ -62,7 +62,7 @@ app.use(passport.session());
 
 app.use("/auth", authRouter);
 app.use("/giftlist", giftListRouter);
-app.use("/user", userRouter);
+app.use("/dashboard", userRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

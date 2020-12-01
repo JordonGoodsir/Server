@@ -86,6 +86,7 @@ describe("Auth Tests", () => {
         .send(invalidUser)
         .end((err, res) => {
           res.should.have.status(401);
+          err.message.should.be.eql("Unauthorized");
         });
       done();
     });

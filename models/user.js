@@ -2,11 +2,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
+const GiftList = require("./giftList").schema;
 
 const validateEmail = (email) => {
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   return regex.test(email);
 };
+
+const Child = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  age: {
+    type: Number,
+    required: true,
+  },
+});
 
 const User = new Schema({
   email: {
@@ -22,11 +34,11 @@ const User = new Schema({
     unique: true,
     uniqueCaseInsensitive: true,
   },
-  children: {},
+  children: [Child],
+  giftList: GiftList,
 });
 
 User.plugin(passportLocalMongoose);
-// Apply the uniqueValidator plugin to userSchema.
 User.plugin(uniqueValidator);
 
 module.exports = mongoose.model("User", User);
