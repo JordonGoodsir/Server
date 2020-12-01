@@ -1,69 +1,106 @@
-const expect = require("expect");
-const mongoose = require("mongoose");
+process.env.NODE_ENV = "test";
+
+const { mongoose } = require("../config/mongoose");
 const User = require("../models/user");
-const { register, login, logout } = require("../controllers/auth_controller");
+const { app } = require("../app");
 
-const databaseConnection = "mongodb://localhost/tooth_inc_test";
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const should = chai.should();
+chai.use(chaiHttp);
 
-before((done) => connectToMongo(done));
-after((done) => {
-  mongoose.disconnect(() => done());
-});
+describe("Auth Tests", () => {
+  before((done) => {
+    chai.request(app).get("/auth/logout");
+    done();
+  });
 
-beforeEach(async () => {
-  await clearData().exec();
-  let user = await setupData();
-  UserId = user._id;
-});
+  after((done) => {
+    mongoose.connection;
+    User.deleteMany({}, (err) => {}).then(() => {
+      mongoose.disconnect();
+    });
+    done();
+  });
 
-function connectToMongo(done) {
-  mongoose.connect(
-    databaseConnection,
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: true,
-      useCreateIndex: true,
-    },
-    (error) => {
-      if (error) {
-        console.log("Error connecting to MongoDB");
-        done();
-      } else {
-        console.log("Connected to test database");
-        done();
-      }
-    }
-  );
-}
+  describe("/POST /auth/register", () => {
+    it("Should allow a user to register", (done) => {
+      const newUser = {
+        username: "Test User",
+        email: "test@email.com",
+        password: "this_is_a_password",
+      };
+      chai
+        .request(app)
+        .post("/auth/register")
+        .send(newUser)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.user.username.should.be.eql("Test User");
+        });
+      done();
+    });
 
-function setupData() {
-  let date = Date.now();
-  let testUser = {};
-  testUser.username = "tester";
-  testUser.email = "test@test.com";
-  testUser.password = "password1";
-  testUser.create_date = date;
-  testUser.modified_date = date;
-  return User.create(testUser);
-}
+    it("Should not allow a user to register with an invalid email", (done) => {
+      const invalidEmailUser = {
+        username: "My Email is Invalid",
+        email: "hello",
+        password: "lul",
+      };
+      chai
+        .request(app)
+        .post("/auth/register")
+        .send(invalidEmailUser)
+        .end((err, res) => {
+          err.message.should.be.eql("Please provide an email");
+        });
+      done();
+    });
+  });
 
-describe("register", () => {
-  let req = {
-    body: {
-      username: "testing",
-      email: "testing@testing.com",
-      password: "password",
-    },
-  };
+  describe("/POST /auth/login", () => {
+    it("Should let a valid user log in", (done) => {
+      const returningUser = {
+        username: "Test User",
+        password: "this_is_a_password",
+      };
+      chai
+        .request(app)
+        .post("/auth/register")
+        .send(returningUser)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.user.username.should.be.eql("Test User");
+        });
+      done();
+    });
 
-  it("should add a new user", async () => {
-    await register(req);
-    const user = await User.find();
-    expect(user.length).toBe(1);
+    it("Should not allow a log in with invalid details", (done) => {
+      const invalidUser = {
+        username: "Invalid",
+        password: "invalid",
+      };
+      chai
+        .request(app)
+        .post("/auth/register")
+        .send(invalidUser)
+        .end((err, res) => {
+          res.should.have.status(401);
+          err.message.should.be.eql("Unauthorized");
+        });
+      done();
+    });
+  });
+
+  describe("GET /auth/logout", () => {
+    it("Should allow a user to logout", (done) => {
+      chai
+        .request(app)
+        .get("/auth/logout")
+        .end((err, res) => {
+          res.should.have.status(200);
+        });
+      done();
+    });
   });
 });
-
-function clearData() {
-  return User.deleteMany();
-}
