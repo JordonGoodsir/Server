@@ -39,7 +39,18 @@ const changeGiftList = (req, res) => {
   });
 };
 
-const removeGiftList = (req, res) => {};
+const removeGiftList = (req, res) => {
+  deleteGiftList(req).exec((err, giftList) => {
+    if (err) {
+      res.status(500);
+      return res.json({
+        err: error.message,
+      });
+    }
+    res.status(204);
+    res.send("Deleted");
+  });
+};
 
 module.exports = {
   getGiftList,

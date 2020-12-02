@@ -5,9 +5,9 @@ const GiftList = new Schema({
   gifts: [
     {
       gift: { type: String, required: true },
-      receiver: String,
     },
   ],
+  receiver: String,
   user: {
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
