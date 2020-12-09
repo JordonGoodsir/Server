@@ -12,7 +12,7 @@ const addGiftList = async (req) => {
   user.save((err) => {
     let giftList = new GiftList({
       gifts: req.body.gifts,
-      user: user._id,
+      user: user.id,
       receiver: req.body.receiver,
     });
     giftList.save();
