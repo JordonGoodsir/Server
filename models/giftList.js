@@ -1,15 +1,17 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const User = require('./user');
-
-const Gift = new Schema({
-  gift: { type: String, required: true },
-  receiver: String,
-});
 
 const GiftList = new Schema({
-  gifts: [Gift],
-  user: User,
+  gifts: [
+    {
+      gift: { type: String, required: true },
+    },
+  ],
+  receiver: String,
+  user: {
+    ref: "User",
+    type: mongoose.Schema.Types.ObjectId,
+  },
 });
 
-module.exports = mongoose.model('GiftList', GiftList);
+module.exports = mongoose.model("GiftList", GiftList);
