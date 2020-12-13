@@ -29,8 +29,8 @@ body should reflect
 
 ```JSON
     {
-      gifts: [gift: "giftitem"],
-      receiver: "giftreceiver",
+      "gifts": ["gift": "giftitem"],
+      "receiver": "giftreceiver",
     }
 ```
 
@@ -39,7 +39,7 @@ body should reflect
 
 ```JSON
     {
-      gifts: [gift: "giftitem"],
-      receiver: "giftreceiver",
+      "gifts": ["gift": "giftitem"],
+      "receiver": "giftreceiver",
     }
 ```
