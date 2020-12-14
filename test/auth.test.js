@@ -66,7 +66,7 @@ describe("Auth Tests", () => {
       };
       chai
         .request(app)
-        .post("/auth/register")
+        .post("/auth/login")
         .send(returningUser)
         .end((err, res) => {
           res.should.have.status(200);
@@ -82,7 +82,7 @@ describe("Auth Tests", () => {
       };
       chai
         .request(app)
-        .post("/auth/register")
+        .post("/auth/login")
         .send(invalidUser)
         .end((err, res) => {
           res.should.have.status(401);

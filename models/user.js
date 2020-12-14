@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
-const GiftList = require("./giftList").schema;
 
 const validateEmail = (email) => {
   const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -35,7 +34,10 @@ const User = new Schema({
     uniqueCaseInsensitive: true,
   },
   children: [Child],
-  giftList: GiftList,
+  giftList: {
+    ref: "GiftList",
+    type: mongoose.Schema.Types.ObjectId,
+  },
 });
 
 User.plugin(passportLocalMongoose);
