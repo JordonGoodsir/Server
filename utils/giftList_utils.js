@@ -7,8 +7,9 @@ const getGiftListById = (req) => {
 
 const addGiftList = async (req) => {
   const userId = req.params.userId;
-  let user = await User.findById(userId);
+  let user = await User.findById(userId).populate("GiftList");
 
+  console.log(user);
   user.save((err) => {
     let giftList = new GiftList({
       gifts: req.body.gifts,

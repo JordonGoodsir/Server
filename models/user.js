@@ -17,6 +17,10 @@ const Child = new Schema({
     type: Number,
     required: true,
   },
+  giftList: {
+    ref: "GiftList",
+    type: mongoose.Schema.Types.ObjectId,
+  },
 });
 
 const User = new Schema({
