@@ -20,7 +20,7 @@ body should reflect
 ```JSON
     {
       gifts: [gift: "giftitem"],
-      receiver: "giftreceiver",
+      receiver: "giftreceiver"
     }
 ```
 
