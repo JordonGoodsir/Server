@@ -14,6 +14,7 @@ const addGiftList = async (req) => {
       gifts: req.body.gifts,
       user: user.id,
       receiver: req.body.receiver,
+      uid: req.body.uid,
     });
     giftList.save();
   });
@@ -23,7 +24,7 @@ const addGiftList = async (req) => {
 
 const updateGiftList = (req) => {
   return GiftList.findOneAndUpdate(
-    { user: req.params.userId, receiver: req.body.receiver },
+    { user: req.params.userId, uid: req.body.uid },
     req.body,
     {
       new: true,
