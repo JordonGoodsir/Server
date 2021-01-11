@@ -8,9 +8,9 @@ const {
 } = require("../controllers/childGiftList_controller");
 const { userAuthenticated } = require("../utils/auth_utils");
 
-router.use(userAuthenticated);
+// router.use(userAuthenticated);
 
-// router.get("/:userId/:childname", getChildGiftList);
+router.get("/:userId/:childname", getChildGiftList);
 
 // router.post("/:userId/:childname", makeChildGiftList);
 

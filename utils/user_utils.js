@@ -12,9 +12,7 @@ const addChild = async (req) => {
     age: req.body.age,
   };
 
-  console.log(child);
   user.children.push(child);
-  console.log(user);
 
   return User.findByIdAndUpdate(user._id, user, {
     new: true,

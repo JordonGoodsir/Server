@@ -3,9 +3,15 @@ const {
   addChildGiftList,
   updateChildGiftList,
   deleteChildGiftList,
-} = require("../utils/giftList_utils");
+} = require("../utils/childGiftList_utils");
 
-const getChildGiftList = (req, res) => {};
+const getChildGiftList = (req, res) => {
+  getChildGiftListById(req)
+    .then((child) => {
+      res.send(child);
+    })
+    .catch((err) => res.json({ error: err }));
+};
 
 const makeChildGiftList = (req, res) => {};
 
