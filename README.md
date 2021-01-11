@@ -43,3 +43,17 @@ body should reflect
       "uid": "uid",
     }
 ```
+
+### User
+
+GET `:userId` - get user
+
+POST `:userId/addchild` - adds a child
+body should reflect
+
+```JSON
+    {
+      "name": "name",
+      "age": "age",
+    }
+```
