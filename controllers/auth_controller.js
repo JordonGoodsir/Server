@@ -23,7 +23,7 @@ const register = (req, res) => {
   );
 };
 
-const login = (req, res) => {
+const login = (req, res) => { 
   authenticate(req, res, function () {
     console.log("authenticated", req.user.username);
     console.log("session object:", req.session);

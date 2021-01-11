@@ -30,7 +30,7 @@ body should reflect
 
 ```JSON
     {
-      "gifts": ["gift": "giftitem"],
+      "gifts": [{"gift": "giftitem"}],
       "uid": "uid",
     }
 ```
