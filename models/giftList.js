@@ -13,6 +13,7 @@ const GiftList = new Schema({
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
   },
+  childName: String,
 });
 
 module.exports = mongoose.model("GiftList", GiftList);
