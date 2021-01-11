@@ -47,7 +47,7 @@ const removeGiftList = (req, res) => {
         err: error.message,
       });
     }
-    res.status(204);
+    res.status(202);
     res.send("Deleted");
   });
 };
