@@ -16,6 +16,6 @@ router.post("/:userId", makeGiftList);
 
 router.patch("/:userId", changeGiftList);
 
-router.delete("/:userId", removeGiftList);
+router.delete("/:userId/:uid", removeGiftList);
 
 module.exports = router;
