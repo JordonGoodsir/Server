@@ -34,6 +34,7 @@ const updateGiftList = (req) => {
 };
 
 const deleteGiftList = (req) => {
+  
   return GiftList.deleteOne({
     user: req.params.userId,
     uid: req.body.uid,
