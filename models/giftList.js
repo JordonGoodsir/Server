@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const GiftList = new Schema({
   gifts: [
     {
-      gift: { type: String, required: true },
+      gift: String,
     },
   ],
   receiver: String,

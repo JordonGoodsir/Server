@@ -44,7 +44,7 @@ const removeGiftList = (req, res) => {
     if (err) {
       res.status(500);
       return res.json({
-        err: error.message,
+        err: err.message,
       });
     }
     res.status(202);
