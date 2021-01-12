@@ -9,10 +9,10 @@ const addGiftList = async (req) => {
   const userId = req.params.userId;
   let user = await User.findById(userId).populate("GiftList");
 
-  console.log(user);
+  console.log(req.body);
   user.save((err) => {
     let giftList = new GiftList({
-      gifts: req.body.gifts,
+      gifts: req.body.gifts || "",
       user: user.id,
       receiver: req.body.receiver,
       uid: req.body.uid,
@@ -37,7 +37,7 @@ const deleteGiftList = (req) => {
   
   return GiftList.deleteOne({
     user: req.params.userId,
-    uid: req.body.uid,
+    uid: req.params.uid,
   });
 };
 
