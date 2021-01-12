@@ -35,14 +35,7 @@ body should reflect
     }
 ```
 
-DELETE `giftlist/:userId` - delete giftlist
-body should reflect
-
-```JSON
-    {
-      "uid": "uid",
-    }
-```
+DELETE `giftlist/:userId/:uid` - delete giftlist
 
 ### User
 
