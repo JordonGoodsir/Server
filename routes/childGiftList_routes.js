@@ -10,12 +10,12 @@ const { userAuthenticated } = require("../utils/auth_utils");
 
 // router.use(userAuthenticated);
 
-router.get("/:userId/:childName", getChildGiftList);
+router.get("/:childUid", getChildGiftList);
 
-// router.post("/:userId/:childName", makeChildGiftList);
+// router.post("/:childUid", makeChildGiftList);
 
-// router.patch("/:userId/:childName", changeChildGiftList);
+// router.patch("/:childUid", changeChildGiftList);
 
-// router.delete("/:userId/:childName", removeChildGiftList);
+// router.delete("/:childUid", removeChildGiftList);
 
 module.exports = router;

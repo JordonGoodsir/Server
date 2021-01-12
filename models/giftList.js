@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const GiftList = new Schema({
   gifts: [
     {
-      gift: { type: String, required: true },
+      gift: String,
     },
   ],
   receiver: String,
@@ -13,7 +13,7 @@ const GiftList = new Schema({
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
   },
-  childName: String,
+  childUid: String,
 });
 
 module.exports = mongoose.model("GiftList", GiftList);
