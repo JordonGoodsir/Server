@@ -17,19 +17,17 @@ const { mongooseConnect } = require("./config/mongoose");
 const app = express();
 const port = process.env.PORT || 3009;
 
-// const whiteList = ["http://localhost:3000"];
+const whiteList = ["http://localhost:3000"];
 
-// const corsOptions = {
-//   credentials: true,
-//   origin: function (origin, callback) {
-//     const whiteListIndex = whiteList.findIndex((url) => url.includes(origin));
-//     callback(null, whiteListIndex > -1);
-//   },
-// };
+const corsOptions = {
+  credentials: true,
+  origin: function (origin, callback) {
+    const whiteListIndex = whiteList.findIndex((url) => url.includes(origin));
+    callback(null, whiteListIndex > -1);
+  },
+};
 
-// app.use(cors(corsOptions));
-
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
