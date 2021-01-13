@@ -8,14 +8,14 @@ const {
 } = require("../controllers/childGiftList_controller");
 const { userAuthenticated } = require("../utils/auth_utils");
 
-router.use(userAuthenticated);
+// router.use(userAuthenticated);
 
-// router.get("/:userId/:childname", getChildGiftList);
+router.get("/:childUid", getChildGiftList);
 
-// router.post("/:userId/:childname", makeChildGiftList);
+router.post("/:childUid", makeChildGiftList);
 
-// router.patch("/:userId/:childname", changeChildGiftList);
+router.patch("/:childUid", changeChildGiftList);
 
-// router.delete("/:userId/:childname", removeChildGiftList);
+router.delete("/:childUid/:uid", removeChildGiftList);
 
 module.exports = router;

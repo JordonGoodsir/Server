@@ -48,5 +48,33 @@ body should reflect
     {
       "name": "name",
       "age": "age",
+      "uid": "uid"
     }
 ```
+
+### ChildGiftList
+
+GET `lettertosanta/:childUid` - get users giftlist
+
+POST `lettertosanta/:childUid` - add giftlist
+body should reflect
+
+```JSON
+    {
+      "gifts": ["gift": "giftitem"],
+      "receiver": "giftreceiver",
+      "uid": "uid"
+    }
+```
+
+PATCH `lettertosanta/:childUid` - update giftlist
+body should reflect
+
+```JSON
+    {
+      "gifts": ["gift": "giftitem"],
+      "uid": "uid",
+    }
+```
+
+DELETE `lettertosanta/:childUid/:uid` - delete giftlist
