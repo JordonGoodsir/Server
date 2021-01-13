@@ -8,7 +8,10 @@ const GiftList = new Schema({
     },
   ],
   receiver: String,
-  uid: String,
+  uid: {
+    type: String,
+    required: true,
+  },
   user: {
     ref: "User",
     type: mongoose.Schema.Types.ObjectId,
