@@ -77,4 +77,4 @@ body should reflect
     }
 ```
 
-DELETE `lettertosanta/:childUid` - delete giftlist
+DELETE `lettertosanta/:childUid/:uid` - delete giftlist
