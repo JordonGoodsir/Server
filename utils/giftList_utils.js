@@ -20,7 +20,7 @@ const addGiftList = async (req) => {
     giftList.save();
   });
 
-  return user;
+  return giftList;
 };
 
 const updateGiftList = (req) => {
