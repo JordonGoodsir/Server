@@ -19,7 +19,7 @@ body should reflect
 
 ```JSON
     {
-      "gifts": ["gift": "giftitem"],
+      "gifts": [{"gift": "giftitem"}],
       "receiver": "giftreceiver",
       "uid": "uid"
     }
@@ -30,12 +30,12 @@ body should reflect
 
 ```JSON
     {
-      "gifts": ["gift": "giftitem"],
+      "gifts": [{"gift": "giftitem"}],
       "uid": "uid",
     }
 ```
 
-DELETE `giftlist/:userId/:uid` - delete giftlist
+DELETE `giftlist/:userId/:uid` - delete gift giftlist
 
 ### User
 
@@ -61,8 +61,7 @@ body should reflect
 
 ```JSON
     {
-      "gifts": ["gift": "giftitem"],
-      "receiver": "giftreceiver",
+      "gifts": [{"gift": "giftitem"}],
       "uid": "uid"
     }
 ```
@@ -72,9 +71,9 @@ body should reflect
 
 ```JSON
     {
-      "gifts": ["gift": "giftitem"],
+      "gifts": [{"gift": "giftitem"}],
       "uid": "uid",
     }
 ```
 
-DELETE `lettertosanta/:childUid/:uid` - delete giftlist
+DELETE `lettertosanta/:childUid/:uid` - delete gift giftlist
