@@ -29,17 +29,18 @@ const corsOptions = {
   },
 };
 
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.json());
-
-// const NODE_ENV = process.env.MONGODB_URI || "mongodb://localhost/santa_site";
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
-mongooseConnect(process.env.NODE_ENV);
+const databaseConnection =
+  process.env.MONGODB_URI || "mongodb://localhost/santa_site";
+
+mongooseConnect(databaseConnection);
 
 app.use(
   session({

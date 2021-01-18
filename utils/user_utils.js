@@ -9,7 +9,8 @@ const addChild = async (req) => {
   let user = await User.findById(userId).populate("GiftList");
   let child = {
     name: req.body.name,
-    age: req.body.age,
+    age: req.body.age, 
+    childUid: req.body.childUid
   };
 
   user.children.push(child);

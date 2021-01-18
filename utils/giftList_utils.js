@@ -10,15 +10,13 @@ const addGiftList = async (req) => {
   let user = await User.findById(userId).populate("GiftList");
 
   console.log(req.body);
-  user.save((err) => {
-    let giftList = new GiftList({
-      gifts: req.body.gifts || "",
-      user: user.id,
-      receiver: req.body.receiver,
-      uid: req.body.uid,
-    });
-    giftList.save();
+  let giftList = new GiftList({
+    gifts: req.body.gifts || "",
+    user: user.id,
+    receiver: req.body.receiver,
+    uid: req.body.uid,
   });
+  giftList.save();
 
   return giftList;
 };

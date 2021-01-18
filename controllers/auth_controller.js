@@ -1,8 +1,6 @@
 const passport = require("passport");
 const User = require("../models/user");
 
-const authenticate = passport.authenticate("local");
-
 const register = (req, res) => {
   User.register(
     new User({
@@ -23,8 +21,8 @@ const register = (req, res) => {
   );
 };
 
-const login = (req, res) => { 
-  authenticate(req, res, function () {
+const login = (req, res) => {
+  passport.authenticate("local")(req, res, () => {
     console.log("authenticated", req.user.username);
     console.log("session object:", req.session);
     console.log("req.user:", req.user);

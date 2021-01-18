@@ -40,7 +40,8 @@ const changeChildGiftList = (req, res) => {
 };
 
 const removeChildGiftList = (req, res) => {
-  deleteChildGiftList(req).exec((err, giftList) => {
+  deleteChildGiftList
+  (req).exec((err, giftList) => {
     if (err) {
       res.status(500);
       return res.json({
